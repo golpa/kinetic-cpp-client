@@ -90,20 +90,23 @@ namespace kinetic {
 
 using std::string;
 
-class OpenSSLInitializer{
+class OpenSSLInitializer
+{
 public:
-    OpenSSLInitializer() {
-        SSL_library_init();
-        SSL_register_locks();
-        SSL_load_error_strings();
-        OpenSSL_add_all_algorithms();
-    }
-    ~OpenSSLInitializer(){
-        SSL_free_locks(); FIPS_mode_set(0);
+  OpenSSLInitializer()
+  {
+    SSL_library_init();
+    SSL_register_locks();
+    SSL_load_error_strings();
+    OpenSSL_add_all_algorithms();
+  }
 
-
-    }
+  ~OpenSSLInitializer()
+  {
+    SSL_free_locks();
+  }
 };
+
 static OpenSSLInitializer init;
 
 SocketWrapper::SocketWrapper(const std::string& host, int port, bool use_ssl, bool nonblocking)
