@@ -44,7 +44,7 @@ namespace {
 
     unsigned long pthread_id_fun()
     {
-        return pthread_self();
+        return (unsigned long) pthread_self();
     }
 
     void SSL_register_locks()

@@ -10,7 +10,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install protobuf; fi
 install: 
   - cmake .
-  - make
+  - make -j 8
 before_script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export JAVA_HOME=$(/usr/libexec/java_home); fi
   - echo $JAVA_HOME
