@@ -11,14 +11,24 @@ The client is using version `3.0.0` of the [Kinetic-Protocol](https://github.com
 
 Dependencies
 ============
-* openssl and protobuf 
-* optional (see [build options](#build-options)): glog and gflags
+
+### Running 
+* openssl and protobuf libraries
+* optional (see [build options](#build-options)): glog and gflags libraries 
+
+### Building 
+* cmake 
+* gcc 4.4 or higher. Or other c++ compiler supporting at least the c++0x feature set provided by gcc 4.4.
+* openssl and protobuf headers
+* protobuf-compiler
+* optional (see [build options](#build-options)): glog and gflags headers 
+
+### Other
 * doxygen/graphviz for generating documentation
+* valgrind for running tests with leak detection (3.12+ )
 
 Compilation
 ============
-The build system uses cmake. The implementation uses c++0x features available from gcc 4.4 onwards.
-
 1. Install any missing dependencies
 2. Clone this git repository 
 3. Create a build directory. If you want you can use the cloned git repository as your build directory, but using a separate directory is recommended in order to cleanly separate sources and generated files. 
