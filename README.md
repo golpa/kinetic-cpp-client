@@ -25,7 +25,7 @@ Dependencies
 
 ### Other
 * doxygen/graphviz for generating documentation
-* valgrind for running tests with leak detection (3.12+ )
+* valgrind for running tests with leak detection (3.12+ required to run with openssl)
 
 Compilation
 ============

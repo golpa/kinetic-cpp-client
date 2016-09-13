@@ -6,15 +6,16 @@ os:
   - linux
   - osx
 before_install:
-  - sudo apt-get install -y protobuf-compiler libprotobuf-dev
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; sudo apt-get install -y protobuf-compiler libprotobuf-dev; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; brew install protobuf; fi
 install: 
   - cmake .
   - make
 before_script:
-  - git clone https://github.com/Kinetic/kinetic-java
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export JAVA_HOME=$(/usr/libexec/java_home); fi
   - echo $JAVA_HOME
-  - mvn -f ./kinetic-java/pom.xml -DskipTests clean package 
+  - git clone https://github.com/Kinetic/kinetic-java
+  - mvn -f ./kinetic-java/pom.xml -DskipTests clean package
   - ./kinetic-java/bin/startSimulator.sh &
   - sleep 10
 script: 
