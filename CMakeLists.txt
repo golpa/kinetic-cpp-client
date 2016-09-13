@@ -19,7 +19,7 @@ find_package(OpenSSL REQUIRED)
 find_package(Protobuf REQUIRED)
 find_library(LIBUNWIND "unwind")
 
-option(BUILD_TEST "Build test executables." off)
+option(BUILD_TEST "Build test executables." on)
 option(GOOGLE_STATIC "Build & link google libraries statically. If not set, glog and gflags have to be installed." on)
 option(PTHREAD_LOCKS "Register pthread locks with OpenSSL for thread-safety." on)
 message(STATUS "Set Options: BUILD_TEST=${BUILD_TEST} GOOGLE_STATIC=${GOOGLE_STATIC} PTHREAD_LOCKS=${PTHREAD_LOCKS}")
