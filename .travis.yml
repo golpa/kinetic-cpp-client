@@ -18,5 +18,5 @@ before_script:
   - ./kinetic-java/bin/startSimulator.sh &
   - sleep 10
 script: 
-  - ./kinetic_client_test
-  - ./kinetic_integration_test
+  - make check
+  - make integration_test
