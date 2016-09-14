@@ -186,31 +186,17 @@ if (BUILD_TEST)
     ExternalProject_add(
             gtest
             PREFIX vendor
-            URL "${kinetic_cpp_client_SOURCE_DIR}/tarballs/gtest-1.6.0.zip"
-            URL_MD5 "4577b49f2973c90bf9ba69aa8166b786"
+            URL "${kinetic_cpp_client_SOURCE_DIR}/tarballs/gtest-1.8.0.zip"
+            URL_MD5 "adfafc8512ab65fd3cf7955ef0100ff5"
             BUILD_IN_SOURCE 1
-            CONFIGURE_COMMAND ""
-            BUILD_COMMAND ${CMAKE_CXX_COMPILER} -DGTEST_USE_OWN_TR1_TUPLE=1 -I../gtest -I../gtest/include -c ../gtest/src/gtest-all.cc && ar -rv libgtest.a gtest-all.o && ranlib libgtest.a
             INSTALL_COMMAND ""
-    )
-
-    ExternalProject_add(
-            gmock
-            PREFIX vendor
-            URL "${kinetic_cpp_client_SOURCE_DIR}/tarballs/gmock-1.6.0.zip"
-            URL_MD5 "f547f47321ca88d3965ca2efdcc2a3c1"
-            BUILD_IN_SOURCE 1
-            CONFIGURE_COMMAND ""
-            BUILD_COMMAND ${CMAKE_CXX_COMPILER} -DGTEST_USE_OWN_TR1_TUPLE=1 -I../gmock -I../gmock/include -I../gtest -I../gtest/include -c ../gmock/src/gmock-all.cc && ar -rv libgmock.a gmock-all.o && ranlib libgmock.a
-            INSTALL_COMMAND ""
-            DEPENDS gtest
     )
 
     include_directories(
             src/test/mock
             src/test
-            ${kinetic_cpp_client_BINARY_DIR}/vendor/src/gmock/include
-            ${kinetic_cpp_client_BINARY_DIR}/vendor/src/gtest/include
+            ${kinetic_cpp_client_BINARY_DIR}/vendor/src/gtest/googletest/include
+            ${kinetic_cpp_client_BINARY_DIR}/vendor/src/gtest/googlemock/include
     )
 
     add_executable(kinetic-test
@@ -225,7 +211,7 @@ if (BUILD_TEST)
             src/test/message_stream_test.cc
             src/test/string_value_test.cc
             )
-    add_dependencies(kinetic-test kinetic_client gtest gmock)
+    add_dependencies(kinetic-test kinetic_client gtest)
 
     target_link_libraries(kinetic-test
             kinetic_client
@@ -233,8 +219,8 @@ if (BUILD_TEST)
             ${PROTOBUF_LIBRARIES}
             ${GLOG_LIBRARIES}
             ${GFLAGS_LIBRARIES}
-            ${CMAKE_BINARY_DIR}/vendor/src/gtest/libgtest.a
-            ${CMAKE_BINARY_DIR}/vendor/src/gmock/libgmock.a
+            ${CMAKE_BINARY_DIR}/vendor/src/gtest/googlemock/libgmock.a
+            ${CMAKE_BINARY_DIR}/vendor/src/gtest/googlemock/gtest/libgtest.a
             ${CMAKE_THREAD_LIBS_INIT}
             )
 
@@ -246,7 +232,7 @@ if (BUILD_TEST)
             src/integration_test/blocking_smoketest.cc
             src/test/kinetic_cpp_client_test.cc
             )
-    add_dependencies(kinetic-integration-test kinetic_client gtest gmock)
+    add_dependencies(kinetic-integration-test kinetic_client gtest)
 
     target_link_libraries(kinetic-integration-test
             kinetic_client
@@ -254,8 +240,8 @@ if (BUILD_TEST)
             ${PROTOBUF_LIBRARIES}
             ${GLOG_LIBRARIES}
             ${GFLAGS_LIBRARIES}
-            ${CMAKE_BINARY_DIR}/vendor/src/gtest/libgtest.a
-            ${CMAKE_BINARY_DIR}/vendor/src/gmock/libgmock.a
+            ${CMAKE_BINARY_DIR}/vendor/src/gtest/googlemock/libgmock.a
+            ${CMAKE_BINARY_DIR}/vendor/src/gtest/googlemock/gtest/libgtest.a
             ${CMAKE_THREAD_LIBS_INIT}
             )
 
